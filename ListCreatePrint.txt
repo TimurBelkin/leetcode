@@ -1,1 +1,65 @@
-test
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+  struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode(int x) : val(x), next(NULL) {}
+  };
+  
+  void printList(ListNode* node_input)
+  {
+      ListNode* node = node_input; 
+      while(node != NULL) {
+          cout << node->val; 
+          if(node->next != NULL)
+          {
+              cout << "->";
+          }
+          node = node->next;
+      } 
+      cout << "\n";
+  }
+  
+    ListNode* makeList(vector<int>& nodes)
+  {
+      if(nodes.size() == 0)
+      {
+          return NULL;
+      }
+      ListNode* start_node = new ListNode(nodes[0]);
+      ListNode* prev_node = start_node;
+      for (int i = 1; i < nodes.size(); ++i)
+      {
+          ListNode* new_node = new ListNode(nodes[i]);
+          prev_node->next = new_node;
+          prev_node = new_node;
+      }
+      return start_node;
+  }
+
+
+
+int main()
+{
+
+    vector<int> vec;
+    vec.push_back(9);
+    vec.push_back(9);
+   vec.push_back(9);
+    
+    printList(vec);
+
+    return 0;
+}
