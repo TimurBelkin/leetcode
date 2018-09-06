@@ -1,0 +1,61 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.empty())
+        {
+            string empty_str;
+            return empty_str;
+        }
+        string max_pref = strs[0];
+        int end_max_pref = strs[0].size();
+        for (int i = 0; i < strs.size(); ++i)
+        {
+            int j = 0;
+            for(; j < strs[i].size() 
+            && j < max_pref.size()
+            && strs[i][j] == max_pref[j]; 
+            ++j);
+            if(j < end_max_pref)
+            {
+               end_max_pref = j;   
+            }
+            if(end_max_pref == 0)
+            {
+                break;
+            }
+        }
+        string pref (max_pref.begin(), max_pref.begin() + end_max_pref);
+        return pref;
+    }
+
+int main()
+{
+
+    vector<string> strs;
+    strs.push_back("flower");
+    strs.push_back("flow");
+    strs.push_back("");
+    strs.push_back("flight");
+    
+   vector<string> strs1;
+    strs1.push_back("dog");
+    strs1.push_back("cat");
+    strs1.push_back("human");
+    
+    vector<string> strs2;
+    
+    cout << longestCommonPrefix(strs);
+
+    return 0;
+}

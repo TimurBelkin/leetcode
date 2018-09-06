@@ -1,0 +1,103 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+  struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode(int x) : val(x), next(NULL) {}
+  };
+  
+  void printList(ListNode* node_input)
+  {
+      ListNode* node = node_input; 
+      while(node != NULL) {
+          cout << node->val; 
+          if(node->next != NULL)
+          {
+              cout << "->";
+          }
+          node = node->next;
+      } 
+      cout << "\n";
+  }
+  
+    ListNode* makeList(vector<int>& nodes)
+  {
+      if(nodes.size() == 0)
+      {
+          return NULL;
+      }
+      ListNode* start_node = new ListNode(nodes[0]);
+      ListNode* prev_node = start_node;
+      for (int i = 1; i < nodes.size(); ++i)
+      {
+          ListNode* new_node = new ListNode(nodes[i]);
+          prev_node->next = new_node;
+          prev_node = new_node;
+      }
+      return start_node;
+  }
+
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* start = new ListNode(0);
+        ListNode* step_walker = start;
+        int shift = 0;
+        while(l1 != NULL 
+        || l2 != NULL
+        || shift != 0)
+        {
+            int first = 0, second = 0;
+            if(l1 != NULL)
+            {
+                first = l1->val;
+                l1 = l1 ->next;
+            }
+            
+            if(l2 != NULL)
+            {
+                second = l2->val;
+                l2 = l2 ->next;
+            }
+            int sum = first + second + shift;
+            shift = sum / 10;
+            sum %= 10;
+            ListNode* new_node = new ListNode(sum);
+            new_node->val = sum;
+            step_walker->next = new_node;
+            step_walker = new_node;
+        }
+        return start->next;
+    }
+
+int main()
+{
+
+    vector<int> vec;
+    vec.push_back(9);
+    vec.push_back(9);
+   vec.push_back(9);
+    
+    vector<int> vec2;
+    //vec2.push_back(5);
+    //vec2.push_back(6);
+    vec2.push_back(1);
+    
+    ListNode* node = makeList(vec);
+    ListNode* node2 = makeList(vec2);
+    
+    ListNode* result = addTwoNumbers(node, node2);
+    printList(result);
+
+    return 0;
+}
