@@ -4,6 +4,7 @@ using namespace std;
 
 class Test
 {
+
 	/*
 	vector<vector<char>> sudoku{
 		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
